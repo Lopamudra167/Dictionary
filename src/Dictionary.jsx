@@ -41,14 +41,11 @@ function Dictionary(){
 const [dictionary, setDictionary] = useState(initialDictionary);
 const [searchTerm, setSearchTerm] = useState('');
 const [definition, setDefinition] = useState('');
-const handleSearch = () =>{
-    const entry = dictionary.find((e) =>{e.word.toLowerCase === searchTerm.toLowerCase});
-    if(entry){
-        setDefinition(entry.meaning)
-    }else{
-        setDefinition("Word not found in the dictionary.")
-    }
+const handleSearch = () => {
+    const entry = dictionary.find((e) => e.word.toLowerCase() === searchTerm.toLowerCase());
+    setDefinition(entry ? entry.meaning : "Word not found in the dictionary.");
 };
+
     return(
      
         <div className="container" style={styles.container}>
