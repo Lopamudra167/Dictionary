@@ -1,65 +1,42 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import './Dictionary.css';
 
-const initialDictionary=  
-[
-
+const initialDictionary = [
     { word: "React", meaning: "A JavaScript library for building user interfaces." },
-
     { word: "Component", meaning: "A reusable building block in React." },
-
     { word: "State", meaning: "An object that stores data for a component." }
-
 ];
-const styles = {
-    
-container:{
-   marginLeft:'10px',
-    fontFamily:'serif'
-  
-},
-heading:{
-    fontSize:'70px'
-},
-input:{
-    padding:'10px',
-    width:'300px',
-    fontSize:'20px'
-},
-button:{
-    padding:'10px',
-    width:'90px',
-    fontSize:'20px'
-},
-h3:{
-    fontSize:'30px',
-   
-},
-p:{fontSize:'20px'}
-};
 
-function Dictionary(){
-const [dictionary, setDictionary] = useState(initialDictionary);
-const [searchTerm, setSearchTerm] = useState('');
-const [definition, setDefinition] = useState('');
-const handleSearch = () => {
-    const entry = dictionary.find((e) => e.word.toLowerCase() === searchTerm.toLowerCase());
-    setDefinition(entry ? entry.meaning : "Word not found in the dictionary.");
-};
+function Dictionary() {
+    const [dictionary] = useState(initialDictionary);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [definition, setDefinition] = useState('');
 
-    return(
-     
-        <div className="container" style={styles.container}>
-             <h1 className="heading" style={styles.heading}>
-            Dictionary App
-             </h1>
-             <div >
-                <input type="text" placeholder="Search for a word..." style={styles.input} value={searchTerm} onChange={(e) =>setSearchTerm(e.target.value)}/>
-                <button className="searchButton"style={styles.button} onClick={handleSearch}>Search</button>
-             </div>
-             <h3 className="h3" style={styles.h3}>Definition:</h3>
-             <p className='p' style={styles.p}>{definition}</p>
+    const handleSearch = () => {
+        const entry = dictionary.find(
+            (e) => e.word.toLowerCase() === searchTerm.toLowerCase()
+        );
+        setDefinition(entry ? entry.meaning : "Word not found in the dictionary.");
+    };
+
+    return (
+        <div className="container">
+            <h1>Dictionary App</h1>
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="Search for a word..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div className="result">
+                <h3>Definition:</h3>
+                <p>{definition}</p>
+            </div>
         </div>
-
     );
 }
+
 export default Dictionary;
